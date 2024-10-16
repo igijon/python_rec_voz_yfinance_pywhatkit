@@ -34,11 +34,13 @@ def audio_to_text():
             return 'Esperando'
         
 def talk(msg):
+    newVoiceRate = 180
+    
     # Encender motor pyttsx3
     engine = pyttsx3.init()
     
-    engine.setProperty('voice', 'com.apple.eloquence.es-ES.Rocko')
-    
+    engine.setProperty('voice', 'com.apple.eloquence.es-ES.Reed')
+    engine.setProperty('rate', newVoiceRate)
     # Pronunciar mensjaje
     engine.say(msg)
     engine.runAndWait()
