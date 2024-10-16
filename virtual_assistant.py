@@ -1,6 +1,7 @@
 import datetime
 import pyttsx3
 import speech_recognition as sr
+import webbrowser
 
 def audio_to_text():
     
@@ -70,3 +71,30 @@ def say_day():
 def say_hour():
     hour = datetime.datetime.now()
     talk(f'En este momento son las {hour.hour} horas y {hour.minute} minutos')
+    
+def saludo():
+    hour = datetime.datetime.now()
+    if hour.hour < 6 or hour.hour > 20:
+        momento = 'Buenas noches.'
+    elif 6 <= hour.hour < 13:
+        momento = 'Buenos días.'
+    else:
+        momento = 'Buenas tardes.'
+    talk(f'{momento} Soy Ian, tu asistente personal. Por favor, dime en qué puedo ayudarte.')
+    
+def requests():
+    saludo()
+    stop = False
+    while not stop:
+        #Activar el micro y guardar la request en un string
+        request = audio_to_text().lower()
+        if 'abrir youtube' in request:
+            talk('Abriendo youtube')
+            webbrowser.open('https://www.youtube.com')
+        elif 'abrir navegador' in request:
+            talk('Abriendo navegador.')
+            webbrowser.open('https://www.google.com')
+        elif 'qué día es hoy' in request:
+            say_day()
+        elif 'qué hora es' in request:
+            say_hour()
