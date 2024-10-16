@@ -36,6 +36,22 @@ def talk(msg):
     # Encender motor pyttsx3
     engine = pyttsx3.init()
     
+    engine.setProperty('voice', 'com.apple.eloquence.es-ES.Sandy')
+    
     # Pronunciar mensjaje
     engine.say(msg)
     engine.runAndWait()
+    
+def getVoices():
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    for i, voice in enumerate(voices):
+        print(f"Voz {i}")
+        print(f"Id {voice.id}")
+        print(f"Nombre {voice.name}")
+        print(f"Idioma {voice.languages}")
+        print(f"Género {voice.gender}")
+        print(f"Género {voice.age}")
+        print(f"---------------------------")
+        
+    
