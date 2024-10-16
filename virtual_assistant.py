@@ -22,7 +22,7 @@ def audio_to_text():
             # Buscar en google lo que hemos escuchado
             text = r.recognize_google(audio, language='es-es')
             return text
-        except sr.UnknowValueError:
+        except sr.UnknownValueError:
             print('Ups, no te entendí')
             return 'Esperando'
         except sr.RequestError:
