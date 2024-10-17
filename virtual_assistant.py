@@ -40,7 +40,7 @@ def talk(msg):
     # Encender motor pyttsx3
     engine = pyttsx3.init()
     
-    engine.setProperty('voice', 'com.apple.eloquence.es-ES.Reed')
+    engine.setProperty('voice', 'com.apple.eloquence.es-ES.Monica')
     engine.setProperty('rate', newVoiceRate)
     # Pronunciar mensjaje
     engine.say(msg)
@@ -83,7 +83,7 @@ def saludo():
         momento = 'Buenos días.'
     else:
         momento = 'Buenas tardes.'
-    talk(f'{momento} Soy Ian, tu asistente personal. Por favor, dime en qué puedo ayudarte.')
+    talk(f'{momento} Soy Ágata, tu asistente personal. Por favor, dime en qué puedo ayudarte.')
     
 def requests():
     saludo()
@@ -101,8 +101,8 @@ def requests():
             say_day()
         elif 'qué hora es' in request:
             say_hour()
-        elif 'precio de acciones de' in request:
-            company = request.split('precio de acciones de').pop().strip()
+        elif 'precio de las acciones de' in request:
+            company = request.split('precio de las acciones de').pop().strip()
             ticker = get_ticker(company)
             price = get_stock_price(ticker)
             msg = f'El precio de las acciones de {company} es {price} euros'
