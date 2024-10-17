@@ -1,6 +1,7 @@
 import datetime
 import pyttsx3
 import speech_recognition as sr
+import yfinance as yf
 import webbrowser
 
 def audio_to_text():
@@ -100,3 +101,42 @@ def requests():
             say_day()
         elif 'qué hora es' in request:
             say_hour()
+        elif 'precio de acciones de' in request:
+            company = request.split('precio de acciones de').pop().strip()
+            ticker = get_ticker(company)
+            price = get_stock_price(ticker)
+            msg = f'El precio de las acciones de {company} es {price} euros'
+            talk(msg)
+            
+def get_stock_price(ticker):
+    stock = yf.Ticker(ticker)
+    # Obtener los datos históricos (último día disponible)
+    history = stock.history(period="1d")
+    closing_price = history['Close'].iloc[0] # Para acceder por posicón
+    return closing_price
+
+def get_ticker(msg):
+    companies = {
+        'AAPL': 'Apple Inc',
+        'MSFT': 'Microsoft Corporation',
+        'GOOGL': 'Alphabet Inc. Google',
+        'AMZN': 'Amazon.com Inc',
+        'META': 'Meta Plattforms, Inc (Facebook)',
+        'TSLA': 'Tesla Inc.',
+        'NVDA': 'NVIDIA Corporation',
+        'INTC': 'Intel Corporation',
+        'AMD': 'Advanced Micro Devices, Inc. (AMD)',
+        'NFLX': 'Netflix, Inc',
+        'CSCO': 'Cisco Systems, Inc',
+        'PYPL': 'PayPal Holdings, Inc',
+        'CRM': 'Salesforce, Inc',
+        'ADBE': 'Adobe Inc',
+        'SPOT': 'Spotify Technology S.A',
+        'ZM': 'Zoom Video Comunications, Inc',
+        'TWTR': 'Twitter, Inc',
+    }
+    
+    for k,v in companies.items():
+        if msg.lower() in v.lower():    
+            return k
+    return ''
