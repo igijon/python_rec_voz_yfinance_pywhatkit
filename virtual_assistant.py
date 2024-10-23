@@ -83,7 +83,7 @@ def saludo():
         momento = 'Buenos días.'
     else:
         momento = 'Buenas tardes.'
-    talk(f'{momento} Soy Ágata, tu asistente personal. Por favor, dime en qué puedo ayudarte.')
+    talk(f'{momento} Soy Lía, tu asistente personal. Por favor, dime en qué puedo ayudarte.')
     
 def requests():
     saludo()
